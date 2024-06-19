@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>My Contacts</h2>
+        {% for contact in contact_list %}
+            <ul>
+                {% if contact.creator.pk == request.user.pk %}
+                    <li>
+                        <a href="{{ contact.get_absolute_url }}">{{ contact.last_name }}, {{ contact.first_name }} </a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endfor %}
+        <p class="notice">You can add contacts using the <b>New Contact</b>
+            button in the site nav.</p>
+        <a class="button" href="{% url 'export' %}" title="Export Contacts">Export
+            Contacts</a>
+    {% endif %}
+
+{% endblock content %}
