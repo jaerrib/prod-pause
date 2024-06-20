@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+        <p>Work Order: {{ workorder.lot_number }}</p>
+        <p>Customer Name: {{ workorder.customer_name }}</p>
+        <p>Assembly Number: {{ workorder.assembly_number }}</p>
+        <p>Part Number: {{ workorder.part_number }}</p>
+        <button class="btn btn-primary">New Downtime Log</button>
+        <hr>
+        <table class="table table-sm mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Entry</th>
+                <th scope="col">Date</th>
+                <th scope="col">Shift</th>
+                <th scope="col">Time Down</th>
+                <th scope="col">Time Up</th>
+                <th scope="col">Problem</th>
+                <th scope="col">Root Cause</th>
+                <th scope="col">Corrective Action</th>
+                <th scope="col">Impact</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for log in log_list %}
+            <tr>
+                <td class="py-3">
+                    <a href="{% url 'log_detail' log.pk %}">
+                        {{ workorder.pk }}</a>
+                </td>
+                <td class="py-3">
+                    {{ workorder.date }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.shift }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.down_time }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.restart_time }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.problem }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.root_cause }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.corrective_action }}
+                </td>
+                <td class="py-3">
+                    {{ workorder.impact }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock content %}
