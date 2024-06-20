@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}New Log{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2>New Log for Workorder {{ workorder.lot_number }}</h2>
+    <form amethod="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mb-3">Save</button>
+    </form>
+</div>
+{% endblock content %}
