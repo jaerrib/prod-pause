@@ -5,11 +5,14 @@
 {% block content %}
 <div class="container">
 
-    <h1>Workorder Manager</h1>
+    <h1>Work Order Manager</h1>
     <table class="table table-sm mt-4">
     <thead>
         <tr>
-        <th scope="col">List Name</th>
+        <th scope="col">Lot Number</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Assembly Number</th>
+        <th scope="col">Part Number</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -17,8 +20,17 @@
     {% for workorder in workorder_list %}
     <tr>
         <td class="py-3">
-            <a href="{% url 'workorder_detail' workorder    .pk %}">
+            <a href="{% url 'workorder_detail' workorder.pk %}">
                 {{ workorder.lot_number }}</a>
+        </td>
+        <td class="py-3">
+            {{ workorder.customer_name }}
+        </td>
+        <td class="py-3">
+            {{ workorder.assembly_number }}
+        </td>
+        <td class="py-3">
+            {{ workorder.part_number }}
         </td>
         <td class="py-3">
             <div class="d-flex">
