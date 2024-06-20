@@ -25,6 +25,19 @@ class WorkorderListView(LoginRequiredMixin, ListView):
 class WorkorderDetailView(LoginRequiredMixin, DetailView):
     model = Workorder
     template_name = "workorder_detail.html"
+    context_object_name = "log_list"
+    pk_url_kwarg = "pk"
+
+    def get_queryset(self):
+        return Workorder.objects.filter(pk=self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        workorder = self.get_object()
+        context["log_list"] = Log.objects.filter(workorder=workorder)
+        context["workorder"] = workorder
+        context["workorder_pk"] = workorder.pk
+        return context
 
 
 class LogDetailView(LoginRequiredMixin, DetailView):
@@ -48,7 +61,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = LogCreateForm()
-        context["workoder"] = Workorder.objects.get(pk=self.kwargs["workorder_pk"])
+        context["workorder"] = Workorder.objects.get(pk=self.kwargs["workorder_pk"])
         return context
 
     def form_valid(self, form):

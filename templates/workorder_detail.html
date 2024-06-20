@@ -7,7 +7,7 @@
         <p>Customer Name: {{ workorder.customer_name }}</p>
         <p>Assembly Number: {{ workorder.assembly_number }}</p>
         <p>Part Number: {{ workorder.part_number }}</p>
-        <button class="btn btn-primary">New Downtime Log</button>
+        <a href="{% url 'log_new' workorder.pk %}" class="btn btn-primary">New Downtime Log</a>
         <hr>
         <table class="table table-sm mt-4">
             <thead>
@@ -28,31 +28,31 @@
             <tr>
                 <td class="py-3">
                     <a href="{% url 'log_detail' log.pk %}">
-                        {{ workorder.pk }}</a>
+                        {{ log.pk }}</a>
                 </td>
                 <td class="py-3">
-                    {{ workorder.date }}
+                    {{ log.date }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.shift }}
+                    {{ log.shift }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.down_time }}
+                    {{ log.down_time }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.restart_time }}
+                    {{ log.restart_time }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.problem }}
+                    {{ log.problem }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.root_cause }}
+                    {{ log.root_cause }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.corrective_action }}
+                    {{ log.corrective_action }}
                 </td>
                 <td class="py-3">
-                    {{ workorder.impact }}
+                    {{ log.impact }}
                 </td>
             </tr>
             {% endfor %}
