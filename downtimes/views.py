@@ -3,9 +3,9 @@ import csv
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView
 
 from .forms import (
     LogCreateForm,
@@ -14,12 +14,12 @@ from .models import Log, Workorder
 
 
 class HomePageView(TemplateView):
-    template_name = "base.html"
+    template_name = "home.html"
 
 
 class WorkorderListView(LoginRequiredMixin, ListView):
     model = Workorder
-    template_name = "workorders.html"   
+    template_name = "workorders.html"
 
 
 class WorkorderDetailView(LoginRequiredMixin, DetailView):
@@ -52,6 +52,10 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "workorder"
     pk_url_kwarg = "workorder_pk"
 
+    def get_success_url(self):
+        workorder_pk = self.object.workorder.pk
+        return reverse("workorder_detail", kwargs={"pk": workorder_pk})
+
     def get_redirect_url(self, param):
         return reverse_lazy("workorder_detail", kwargs={"param": param})
 
@@ -62,6 +66,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["form"] = LogCreateForm()
         context["workorder"] = Workorder.objects.get(pk=self.kwargs["workorder_pk"])
+        context["workorder_pk"] = self.kwargs["workorder_pk"]
         return context
 
     def form_valid(self, form):
