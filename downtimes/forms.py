@@ -15,6 +15,7 @@ class LogCreateForm(ModelForm):
         model = Log
         fields = [
             "date",
+            "shift",
             "down_time",
             "restart_time",
             "problem",
@@ -34,6 +35,7 @@ class LogUpdateForm(ModelForm):
         model = Log
         fields = [
             "date",
+            "shift",
             "down_time",
             "restart_time",
             "problem",
