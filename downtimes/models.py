@@ -33,8 +33,13 @@ class Log(models.Model):
     initiator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.workorder.assembly_number + "-" + self.workorder.lot_number + "-Entry" + str(
-            self.pk)
+        return (
+            self.workorder.assembly_number
+            + "-"
+            + self.workorder.lot_number
+            + "-Entry"
+            + str(self.pk)
+        )
 
     def get_absolute_url(self):
         return reverse("log_detail", kwargs={"pk": self.pk})

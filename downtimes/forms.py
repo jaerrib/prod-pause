@@ -7,8 +7,10 @@ from .models import Log, Workorder
 class DateInput(forms.DateInput):
     input_type = "date"
 
+
 class TimeInput(forms.TimeInput):
     input_type = "time"
+
 
 class LogCreateForm(ModelForm):
     class Meta:
@@ -21,8 +23,9 @@ class LogCreateForm(ModelForm):
             "problem",
             "root_cause",
             "corrective_action",
-            "impact"
+            "impact",
         ]
+
         widgets = {
             "due_date": DateInput(),
             "down_time": TimeInput(),
@@ -41,7 +44,7 @@ class LogUpdateForm(ModelForm):
             "problem",
             "root_cause",
             "corrective_action",
-            "impact"
+            "impact",
         ]
         widgets = {
             "due_date": DateInput(),
