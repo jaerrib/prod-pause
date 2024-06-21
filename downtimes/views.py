@@ -53,7 +53,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     pk_url_kwarg = "workorder_pk"
 
     def get_redirect_url(self, param):
-        return reverse_lazy("log_list_detail", kwargs={"param": param})
+        return reverse_lazy("workorder_detail", kwargs={"param": param})
 
     def get_queryset(self):
         return Workorder.objects.filter(pk=self.kwargs["workorder_pk"])
@@ -66,7 +66,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.workorder = Workorder.objects.get(pk=self.kwargs["workorder_pk"])
-        form.instance.creator = self.request.user
+        form.instance.initiator = self.request.user
         return super().form_valid(form)
 
 
