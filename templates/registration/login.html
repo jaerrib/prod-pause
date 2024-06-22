@@ -4,18 +4,17 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex row">
-        <div class="col card bg-body-tertiary">
+        <div class="container col-lg-4 col-10  card bg-body-tertiary p-3">
             <h1>Log In</h1>
-            <p class="text-danger">Use username <span class="fw-bold">default</span> and password <span class="fw-bold">testpass123</span> to test things out!</p>
+            <p class="text-danger">Use username <span
+                    class="fw-bold">default</span> and password <span
+                    class="fw-bold">testpass123</span> to test things out!</p>
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button type="submit" class="btn btn-primary mb-3">Log In</button>
+                <button type="submit" class="btn btn-primary mb-3">Log In
+                </button>
             </form>
-        </div>
-        <div class="col">Placeholder</div>
     </div>
 
 </div>
