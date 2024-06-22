@@ -75,38 +75,49 @@ class LogCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# def export_data(request):
-#     query_set = ToDo.objects.filter(creator=request.user.pk).order_by(
-#         "todo_list__title"
-#     )
-#     response = HttpResponse(
-#         content_type="text/csv",
-#         headers={"Content-Disposition": 'attachment; filename="exported_data.csv"'},
-#     )
-#     writer = csv.writer(response)
-
-#     writer.writerow(
-#         [
-#             "Title",
-#             "Details",
-#             "Important",
-#             "Urgent",
-#             "Due Date",
-#             "Completed",
-#             "ToDo List",
-#         ]
-#     )
-#     for item in query_set:
-#         writer.writerow(
-#             [
-#                 item.title,
-#                 item.details,
-#                 item.important,
-#                 item.urgent,
-#                 item.due_date,
-#                 item.completed,
-#                 item.todo_list,
-#             ]
-#         )
-
-#     return response
+def export_data(request, pk):
+    query_set = Log.objects.filter(workorder=pk)
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="exported_data.csv"'},
+    )
+    writer = csv.writer(response)
+    if len(query_set) > 0:
+        writer.writerow(
+            ["Customer Name", "Assembly Number", "Part Number", "Lot Number"]
+        )
+        workorder = Workorder.objects.get(id=pk)
+        writer.writerow(
+            [
+                workorder.customer_name,
+                workorder.assembly_number,
+                workorder.part_number,
+                workorder.lot_number,
+            ]
+        )
+        writer.writerow(
+            [
+                "Date",
+                "Shift",
+                "Down Time",
+                "Restart Time",
+                "Problem",
+                "Corrective Action",
+                "Impact",
+                "Initiator",
+            ]
+        )
+        for item in query_set:
+            writer.writerow(
+                [
+                    item.date,
+                    item.shift,
+                    item.down_time,
+                    item.restart_time,
+                    item.problem,
+                    item.corrective_action,
+                    item.impact,
+                    item.initiator,
+                ]
+            )
+    return response
