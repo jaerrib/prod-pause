@@ -2,12 +2,15 @@
 
 {% block header %}
 
-<nav class="navbar navbar-expand-lg text-light bg-dark mb-3 sticky-top" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg text-light bg-dark mb-3 sticky-top"
+     data-bs-theme="dark">
     <div class="container-fluid">
         {% if user.is_authenticated %}
-        <h1><a class="navbar-brand fw-bold" href="{% url 'workorder_list' %}">ProdPause</a></h1>
+        <h1><a class="navbar-brand fw-bold" href="{% url 'workorder_list' %}">ProdPause</a>
+        </h1>
         {% else %}
-        <h1><a class="navbar-brand fw-bold" href="{% url 'home' %}">ProdPause</a></h1>
+        <h1><a class="navbar-brand fw-bold"
+               href="{% url 'home' %}">ProdPause</a></h1>
         {% endif %}
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -31,11 +34,12 @@
                         <input class="nav-link" type="submit" value="Log Out">
                     </form>
                 </li>
-            {% else %}
-            <li class="nav-item">
-                <a  class="btn btn-primary" href="{% url 'login' %}">Log In</a>
-            </li>
-            {% endif %}
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="{% url 'login' %}">Log
+                        In</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
