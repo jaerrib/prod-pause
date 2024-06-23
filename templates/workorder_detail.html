@@ -1,62 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<div class="mx-5">
 
-        <p>Work Order: {{ workorder.lot_number }}</p>
-        <p>Customer Name: {{ workorder.customer_name }}</p>
-        <p>Assembly Number: {{ workorder.assembly_number }}</p>
-        <p>Part Number: {{ workorder.part_number }}</p>
-        <a href="{% url 'log_new' workorder.pk %}" class="btn btn-primary">New Downtime Log</a>
-        <hr>
-        <table class="table table-sm mt-4">
-            <thead>
-                <tr>
-                <th scope="col">Entry</th>
-                <th scope="col">Date</th>
-                <th scope="col">Shift</th>
-                <th scope="col">Time Down</th>
-                <th scope="col">Time Up</th>
-                <th scope="col">Problem</th>
-                <th scope="col">Root Cause</th>
-                <th scope="col">Corrective Action</th>
-                <th scope="col">Impact</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            {% for log in log_list %}
-            <tr>
-                <td class="py-3">
-                    <a href="{% url 'log_detail' log.pk %}">
-                        {{ log.pk }}</a>
-                </td>
-                <td class="py-3">
-                    {{ log.date }}
-                </td>
-                <td class="py-3">
-                    {{ log.shift }}
-                </td>
-                <td class="py-3">
-                    {{ log.down_time }}
-                </td>
-                <td class="py-3">
-                    {{ log.restart_time }}
-                </td>
-                <td class="py-3">
-                    {{ log.problem }}
-                </td>
-                <td class="py-3">
-                    {{ log.root_cause }}
-                </td>
-                <td class="py-3">
-                    {{ log.corrective_action }}
-                </td>
-                <td class="py-3">
-                    {{ log.impact }}
-                </td>
-            </tr>
-            {% endfor %}
+    <h1>Downtime History</h1>
+    <table class="table table-borderless table-sm mt-4">
+        <thead>
+        <tr>
+            <th scope="col">Workorder</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Assembly Number</th>
+            <th scope="col">Part Number</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td class="py-3">
+                <p>{{ workorder.lot_number }}</p>
+            </td>
+            <td class="py-3">
+                <p>{{ workorder.customer_name }}</p>
+            </td>
+            <td class="py-3">
+                <p>{{ workorder.assembly_number }}</p>
+            </td>
+            <td class="py-3">
+                <p>{{ workorder.part_number }}</p>
+            </td>
+        </tr>
         </tbody>
-        </table>
-    </div>
+    </table>
+
+    <a href="{% url 'log_new' workorder.pk %}" class="btn btn-primary">Add
+        Downtime</a>
+
+    <table class="table table-hover table-sm mt-5">
+        <thead>
+        <tr>
+            <th scope="col">Entry</th>
+            <th scope="col">Date</th>
+            <th scope="col">Shift</th>
+            <th scope="col">Time Down</th>
+            <th scope="col">Time Up</th>
+            <th scope="col">Problem</th>
+            <th scope="col">Root Cause</th>
+            <th scope="col">Corrective Action</th>
+            <th scope="col">Impact</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for log in log_list %}
+        <tr>
+            <td class="py-3">
+                {{ log.pk }}
+            </td>
+            <td class="py-3">
+                {{ log.date }}
+            </td>
+            <td class="py-3">
+                {{ log.shift }}
+            </td>
+            <td class="py-3">
+                {{ log.down_time }}
+            </td>
+            <td class="py-3">
+                {{ log.restart_time }}
+            </td>
+            <td class="py-3">
+                {{ log.problem }}
+            </td>
+            <td class="py-3">
+                {{ log.root_cause }}
+            </td>
+            <td class="py-3">
+                {{ log.corrective_action }}
+            </td>
+            <td class="py-3">
+                {{ log.impact }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
