@@ -31,12 +31,12 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
-    "*.fly.dev",
+    "https://prod-pause.fly.dev",
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
 ]
-CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev"]
+CSRF_TRUSTED_ORIGINS = ["https://prod-pause.fly.dev"]
 
 
 # Application definition
