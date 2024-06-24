@@ -6,9 +6,9 @@
 {% block content %}
         <div class="container col-lg-4 col-10  card bg-body-tertiary p-3">
             <h1>Log In</h1>
-            <p class="text-danger">Use username <span
+            <!-- <p class="text-danger">Use username <span
                     class="fw-bold">default</span> and password <span
-                    class="fw-bold">testpass123</span> to test things out!</p>
+                    class="fw-bold">testpass123</span> to test things out!</p> -->
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
