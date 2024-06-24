@@ -34,7 +34,7 @@ class WorkorderDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         workorder = self.get_object()
-        context["log_list"] = Log.objects.filter(workorder=workorder)
+        context["log_list"] = Log.objects.filter(workorder=workorder).order_by("-date", "-down_time")
         context["workorder"] = workorder
         context["workorder_pk"] = workorder.pk
         return context
