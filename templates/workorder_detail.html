@@ -47,6 +47,7 @@
             <th scope="col">Root Cause</th>
             <th scope="col">Corrective Action</th>
             <th scope="col">Impact</th>
+            <th scope="col">Initiator</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -78,6 +79,9 @@
             </td>
             <td class="py-3">
                 {{ log.impact }}
+            </td>
+            <td class="py-3">
+                {{ log.initiator }}
             </td>
         </tr>
         {% endfor %}
