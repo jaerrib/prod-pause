@@ -27,7 +27,7 @@ class LogCreateForm(ModelForm):
         ]
 
         widgets = {
-            "due_date": DateInput(),
+            "date": DateInput(),
             "down_time": TimeInput(),
             "restart_time": TimeInput(),
         }
@@ -47,7 +47,7 @@ class LogUpdateForm(ModelForm):
             "impact",
         ]
         widgets = {
-            "due_date": DateInput(),
+            "date": DateInput(),
             "down_time": TimeInput(),
             "restart_time": TimeInput(),
         }
