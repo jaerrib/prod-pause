@@ -43,6 +43,7 @@
             <th scope="col">Shift</th>
             <th scope="col">Time Down</th>
             <th scope="col">Time Up</th>
+            <th scope="col">Error Code</th>
             <th scope="col">Problem</th>
             <th scope="col">Root Cause</th>
             <th scope="col">Corrective Action</th>
@@ -67,6 +68,9 @@
             </td>
             <td class="py-3">
                 {{ log.restart_time }}
+            </td>
+            <td class="py-3">
+                {{ log.error_code }}
             </td>
             <td class="py-3">
                 {{ log.problem }}
