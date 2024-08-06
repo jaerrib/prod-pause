@@ -8,10 +8,7 @@ class Workorder(models.Model):
     assembly_number = models.CharField(max_length=100)
     part_number = models.CharField(max_length=100)
     lot_number = models.CharField(max_length=100)
-    creator = models.ForeignKey(
-        "auth.User",
-        on_delete=models.CASCADE,
-    )
+    creator = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.lot_number
@@ -26,7 +23,10 @@ class Log(models.Model):
     shift = models.IntegerField()
     down_time = models.TimeField()
     restart_time = models.TimeField()
-    problem = models.TextField()
+    error_code = models.ForeignKey(
+        "ErrorCode", on_delete=models.CASCADE, null=True, blank=True
+    )
+    problem = models.TextField(null=True, blank=True)
     root_cause = models.TextField()
     corrective_action = models.TextField()
     impact = models.TextField()
@@ -43,3 +43,10 @@ class Log(models.Model):
 
     def get_absolute_url(self):
         return reverse("log_detail", kwargs={"pk": self.pk})
+
+
+class ErrorCode(models.Model):
+    details = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.details

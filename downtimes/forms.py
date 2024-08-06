@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import Log, Workorder
+from .models import Log, Workorder, ErrorCode
 
 
 class DateInput(forms.DateInput):
@@ -13,6 +13,8 @@ class TimeInput(forms.TimeInput):
 
 
 class LogCreateForm(ModelForm):
+    error_code = forms.ModelChoiceField(queryset=ErrorCode.objects.all())
+
     class Meta:
         model = Log
         fields = [
@@ -20,6 +22,7 @@ class LogCreateForm(ModelForm):
             "shift",
             "down_time",
             "restart_time",
+            "error_code",
             "problem",
             "root_cause",
             "corrective_action",
@@ -34,6 +37,8 @@ class LogCreateForm(ModelForm):
 
 
 class LogUpdateForm(ModelForm):
+    error_code = forms.ModelChoiceField(queryset=ErrorCode.objects.all())
+
     class Meta:
         model = Log
         fields = [
@@ -41,6 +46,7 @@ class LogUpdateForm(ModelForm):
             "shift",
             "down_time",
             "restart_time",
+            "error_code",
             "problem",
             "root_cause",
             "corrective_action",
