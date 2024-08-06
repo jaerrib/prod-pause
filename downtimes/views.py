@@ -1,8 +1,7 @@
 import csv
 
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView
@@ -34,7 +33,9 @@ class WorkorderDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         workorder = self.get_object()
-        context["log_list"] = Log.objects.filter(workorder=workorder).order_by("-date", "-down_time")
+        context["log_list"] = Log.objects.filter(workorder=workorder).order_by(
+            "-date", "-down_time"
+        )
         context["workorder"] = workorder
         context["workorder_pk"] = workorder.pk
         return context
@@ -101,6 +102,7 @@ def export_data(request, pk):
                 "Shift",
                 "Down Time",
                 "Restart Time",
+                "Error Code",
                 "Problem",
                 "Corrective Action",
                 "Impact",
@@ -114,6 +116,7 @@ def export_data(request, pk):
                     item.shift,
                     item.down_time,
                     item.restart_time,
+                    item.error_code,
                     item.problem,
                     item.corrective_action,
                     item.impact,
