@@ -34,6 +34,18 @@
                                    value="Log Out">
                         </form>
                     </li>
+                    <li>
+                        <form class="d-flex" role="search"
+                              action="{% url 'search' %}">
+                            <input class="form-control me-2" type="search"
+                                   name="search" placeholder="Search"
+                                   aria-label="Search">
+                            <button class="btn btn-primary" type="submit">
+                                Search
+                            </button>
+                        </form>
+                    </li>
+
                     {% else %}
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{% url 'login' %}">Log

@@ -1,6 +1,7 @@
 import csv
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, DetailView
@@ -124,3 +125,18 @@ def export_data(request, pk):
                 ]
             )
     return response
+
+
+class SearchResultsView(ListView):
+    model = Workorder
+    template_name = "search_results.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get("search")
+        object_list = Workorder.objects.filter(
+            Q(customer_name__icontains=query)
+            | Q(assembly_number__icontains=query)
+            | Q(part_number__icontains=query)
+            | Q(lot_number__icontains=query)
+        )
+        return object_list

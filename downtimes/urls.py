@@ -1,6 +1,8 @@
 from django.urls import path
+
 from .views import (
     HomePageView,
+    SearchResultsView,
     WorkorderListView,
     WorkorderDetailView,
     LogDetailView,
@@ -21,4 +23,5 @@ urlpatterns = [
         LogCreateView.as_view(),
         name="log_new",
     ),
+    path("search/", SearchResultsView.as_view(), name="search"),
 ]
