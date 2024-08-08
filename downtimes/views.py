@@ -1,15 +1,14 @@
 import csv
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponse
-from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView
 
-from .forms import (
-    LogCreateForm,
-)
+from .forms import LogCreateForm
 from .models import Log, Workorder
 
 
@@ -18,8 +17,10 @@ class HomePageView(TemplateView):
 
 
 class WorkorderListView(LoginRequiredMixin, ListView):
+    paginate_by = 10
     model = Workorder
     template_name = "workorders.html"
+    ordering = ["-lot_number"]
 
 
 class WorkorderDetailView(LoginRequiredMixin, DetailView):
