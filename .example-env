@@ -1,0 +1,6 @@
+SECRET_KEY="super secret key"
+
+# Comma-separated hostnames or IPs the app will accept
+ALLOWED_HOSTS=localhost,127.0.0.1
+# Comma-separated origins (must include scheme and optional port)
+CSRF_TRUSTED_ORIGINS=http://localhost:8080,http://127.0.0.1:8080
